@@ -1,4 +1,4 @@
-#Real time messaging app using-WebSockets
+#Real time messaging app
 
 This is a small messaging application what I wrote to understand how to use the ever growinng popularity of this technology.
 
