@@ -1,5 +1,4 @@
-# RTC-chat-app-using-WebSockets
-A small chat built that uses WebSockets as the backbone
+#Real time messaging app using-WebSockets
 
 This is a small messaging application what I wrote to understand how to use the ever growinng popularity of this technology.
 
@@ -24,7 +23,7 @@ Currently it only supports conversations of two users.
 
 ## Contributing
 
-If you want to contribute to this project you're more than welcome, just send a pull request and you are done!
+Although I built this small app just for learning purposes, please, feel free to contribute to this project, just send a pull request and you are done!
 
 ## Authors
 
