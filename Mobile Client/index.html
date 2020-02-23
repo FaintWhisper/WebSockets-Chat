@@ -1,0 +1,83 @@
+<div class="container">
+    <div id="m" class="messages"></div>
+    <input id="t" type="text" autofocus></input>
+    <button id="b">Send</button>
+</div>
+
+<style>
+    * {
+        outline: none;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 20px;
+    }
+
+    .container {
+        height: 70%;
+        width: 80%;
+        margin: auto;
+        margin-top: 20%;
+    }
+
+    .messages {
+        height: 30%;
+        width: 100%;
+        border: 1px solid black;
+        padding: 13px;
+        margin-bottom: 20px;
+        white-space: pre-wrap;
+        overflow: auto;
+    }
+
+    #t {
+        height: 30px;
+        width: 90%;
+        border-style: none;
+        border-bottom: 1px solid black;
+    }
+
+    #b {
+        height: 40px;
+        width: 55px;;
+    }
+</style>
+
+<script>
+    const ws = new WebSocket("ws://192.168.1.190:8080");
+    const messages = document.querySelector("#m");
+    const text = document.querySelector("#t");
+    const button = document.querySelector("#b");
+
+    const sendMessage = () => {
+        const messageEl = document.createElement("p");
+
+        ws.send(text.value);
+        messageEl.innerHTML = ">> " + text.value;
+        messages.appendChild(messageEl);
+        messageEl.scrollIntoView();
+        text.value = "";
+    }
+
+    ws.onmessage = data => {
+        const message = JSON.parse(data["data"]);
+
+        if (!message["hidden"]) {
+            const messageEl = document.createElement("p");
+            messageEl.innerHTML = message["content"];
+            messages.appendChild(messageEl);
+            messageEl.scrollIntoView();
+        }
+    };
+
+
+    button.addEventListener("click", () => {
+        sendMessage();
+    });
+
+    document.addEventListener("keypress", e => {
+        if (e.keyCode == 13)
+            sendMessage();
+    });
+</script>
